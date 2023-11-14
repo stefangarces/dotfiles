@@ -41,6 +41,36 @@ brew bundle --file ~/.dotfiles/Brewfile
 cd ~/.dotfiles && brew bundle
 ```
 
+## Get latest stable nvim
+
+### 1. Install dependencies:
+
+```
+sudo apt-get install ninja-build gettext cmake unzip curl
+```
+
+### 2. Clone Neovim repo:
+
+```
+git clone https://github.com/neovim/neovim.git
+
+cd neovim
+```
+
+### 3. Checkout stable version (0.9.1)? :
+
+```
+git checkout v0.9.1
+```
+
+### 4. Build and install:
+
+```
+make CMAKE_BUILD_TYPE=Release
+
+sudo make install
+```
+
 
 ## TODO List
 
