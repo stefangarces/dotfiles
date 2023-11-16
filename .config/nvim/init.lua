@@ -72,6 +72,9 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
+  -- Git blame plugin
+  'APZelos/blamer.nvim',
+
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
@@ -249,6 +252,10 @@ vim.o.mouse = 'a'
 
 -- Show relative numbers
 vim.wo.relativenumber = true
+
+-- Git Blamer Configurations
+vim.g.blamer_enabled = true -- Enable Git Blamer on nvim startup
+vim.g.blamer_show_in_visual_modes = false -- Disables Git Blamer on visual mode
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
