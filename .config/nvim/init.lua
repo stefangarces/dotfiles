@@ -45,7 +45,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Shorten function name
-local keymap = vim.keymap.set 
+local keymap = vim.keymap.set
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
@@ -64,6 +64,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("options")
+require("keymappings")
 
 -- [[ Configure plugins ]]
 -- NOTE: Here is where you install your plugins.
@@ -73,9 +74,11 @@ require("options")
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
+  { 'catppuccin/nvim', as = 'catppuccin' },
+
   -- Git blame plugin
   'APZelos/blamer.nvim',
-  install = { colorscheme = { "catppuccin" } },
+
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
@@ -160,22 +163,12 @@ require('lazy').setup({
   },
 
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
-  },
-
-  {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
         component_separators = '|',
         section_separators = '',
       },
@@ -234,25 +227,45 @@ require('lazy').setup({
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
   --    up-to-date with whatever is in the kickstart repo.
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
 }, {})
 
+require("catppuccin").setup({
+	color_overrides = {
+		mocha = {
+			rosewater = "#efc9c2",
+			flamingo = "#ebb2b2",
+			pink = "#f2a7de",
+			mauve = "#b889f4",
+			red = "#ea7183",
+			maroon = "#ea838c",
+			peach = "#f39967",
+			yellow = "#eaca89",
+			green = "#96d382",
+			teal = "#78cec1",
+			sky = "#91d7e3",
+			sapphire = "#68bae0",
+			blue = "#739df2",
+			lavender = "#a0a8f6",
+			text = "#b5c1f1",
+			subtext1 = "#a6b0d8",
+			subtext0 = "#959ec2",
+			overlay2 = "#848cad",
+			overlay1 = "#717997",
+			overlay0 = "#63677f",
+			surface2 = "#505469",
+			surface1 = "#3e4255",
+			surface0 = "#2c2f40",
+			base = "#1a1c2a",
+			mantle = "#141620",
+			crust = "#0e0f16",
+		},
+	},
+})
+
+vim.cmd[[colorscheme catppuccin]]
+
 -- [[ Basic Keymaps ]]
-
--- Keymaps for better default experience
--- See `:help keymap()`
-keymap({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
--- Remap for dealing with word wrap
-keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
--- Diagnostic keymaps
-keymap('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-keymap('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-keymap('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-keymap('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -314,19 +327,6 @@ local function live_grep_git_root()
     })
   end
 end
-
--- Enable to use Shift + hjkl to move around in Insert Mode
-keymap('i', '<S-h>', '<Left>', {noremap = true, silent = true})
-keymap('i', '<S-j>', '<Down>', {noremap = true, silent = true})
-keymap('i', '<S-k>', '<Up>', {noremap = true, silent = true})
-keymap('i', '<S-l>', '<Right>', {noremap = true, silent = true})
-
--- Disabling using arrow keys in all modes 
-keymap({'v', 'i', 'n'}, '<Up>', '<Nop>', {noremap = true, silent = true})
-keymap({'v', 'i', 'n'}, '<Down>', '<Nop>', {noremap = true, silent = true})
-keymap({'v', 'i', 'n'}, '<Left>', '<Nop>', {noremap = true, silent = true})
-keymap({'v', 'i', 'n'}, '<Right>', '<Nop>', {noremap = true, silent = true})
-
 
 vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
 
