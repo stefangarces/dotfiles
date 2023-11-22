@@ -26,3 +26,11 @@ keymap({'v', 'i', 'n'}, '<Up>', '<Nop>', {noremap = true, silent = true})
 keymap({'v', 'i', 'n'}, '<Down>', '<Nop>', {noremap = true, silent = true})
 keymap({'v', 'i', 'n'}, '<Left>', '<Nop>', {noremap = true, silent = true})
 keymap({'v', 'i', 'n'}, '<Right>', '<Nop>', {noremap = true, silent = true})
+
+-- keymaps for opening telescope-file-browser
+keymap(
+  "n",
+  "<space>fb",
+  ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
+  { noremap = true }
+)

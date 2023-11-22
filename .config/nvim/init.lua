@@ -1,42 +1,4 @@
---[[
-
-=====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
-
-Kickstart.nvim is *not* a distribution.
-
-Kickstart.nvim is a template for your own configuration.
-  The goal is that you can read every line of code, top-to-bottom, understand
-  what your configuration is doing, and modify it to suit your needs.
-
-  Once you've done that, you should start exploring, configuring and tinkering to
-  explore Neovim!
-
-  If you don't know anything about Lua, I recommend taking some time to read through
-  a guide. One possible example:
-  - https://learnxinyminutes.com/docs/lua/
-
-
-  And then you can explore or search through `:help lua-guide`
-  - https://neovim.io/doc/user/lua-guide.html
-
-
-Kickstart Guide:
-
-I have left several `:help X` comments throughout the init.lua
-You should run that command and read that help section for more information.
-
-In addition, I have some `NOTE:` items throughout the file.
-These are for you, the reader to help understand what is happening. Feel free to delete
-them once you know what you're doing, but they should serve as a guide for when you
-are first encountering a few different constructs in your nvim config.
-
-I hope you enjoy your Neovim journey,
-- TJ
-
-P.S. You can delete this when you're done too. It's your config now :)
---]]
+-- Coco oil 
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -72,10 +34,17 @@ require("keymappings")
 --
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
-require('lazy').setup({
+local lazy = require('lazy')
+
+lazy.setup({
   -- NOTE: First, some plugins that don't require any configuration
   { 'catppuccin/nvim', as = 'catppuccin' },
 
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  },
+  
   -- Git blame plugin
   'APZelos/blamer.nvim',
 
@@ -230,6 +199,7 @@ require('lazy').setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
 }, {})
 
+
 require("catppuccin").setup({
 	color_overrides = {
 		mocha = {
@@ -267,8 +237,7 @@ vim.cmd[[colorscheme catppuccin]]
 
 -- [[ Basic Keymaps ]]
 
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
+-- [[ Highlight on yank ]] See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
@@ -278,18 +247,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- [[ Configure Telescope ]]
--- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-  },
-}
+
+
+require("telescope").load_extension "file_browser"
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -303,8 +263,7 @@ local function find_git_root()
   local cwd = vim.fn.getcwd()
   -- If the buffer is not associated with a file, return nil
   if current_file == "" then
-    current_dir = cwd
-  else
+    current_dir = cwd else
     -- Extract the directory from the current file's path
     current_dir = vim.fn.fnamemodify(current_file, ":h")
   end
