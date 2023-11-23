@@ -71,6 +71,12 @@ make CMAKE_BUILD_TYPE=Release
 sudo make install
 ```
 
+### 5. Use your Neovim configs.
+Install ripgrep to get grep_string to function for Telescope | on Linux and Mac
+```
+sudo apt install ripgrep -y
+```
+
 
 ## TODO List
 
