@@ -74,6 +74,13 @@ start_mock() {
     tmux attach -t "mock"
 }
 
+# Start mock for the charging-fe repostory
+start_mock_report() {
+    tmux new-session -d -s "mock" "npm run start:mock"
+    tmux split-window -h -t "mock" "npm run start:dev"
+    tmux attach -t "mock"
+}
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
