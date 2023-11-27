@@ -1,8 +1,4 @@
--- Coco oil 
-
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+-- Set mapleaders
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -38,22 +34,22 @@ local lazy = require('lazy')
 
 lazy.setup({
   -- NOTE: First, some plugins that don't require any configuration
-  { 'catppuccin/nvim', as = 'catppuccin' },
+  { 'catppuccin/nvim',      as = 'catppuccin' },
 
   {
     "nvim-telescope/telescope-file-browser.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
   },
-  
+
   -- Git blame plugin
   'APZelos/blamer.nvim',
-
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
-
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
+  -- Plugin for comment out code
+  'tpope/vim-commentary',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -73,7 +69,7 @@ lazy.setup({
       'folke/neodev.nvim',
     },
   },
-  
+
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -191,7 +187,7 @@ lazy.setup({
   --       Uncomment any of the lines below to enable them.
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
-  
+
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
   --    up-to-date with whatever is in the kickstart repo.
@@ -199,43 +195,7 @@ lazy.setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
 }, {})
 
-
-require("catppuccin").setup({
-	color_overrides = {
-		mocha = {
-			rosewater = "#efc9c2",
-			flamingo = "#ebb2b2",
-			pink = "#f2a7de",
-			mauve = "#b889f4",
-			red = "#ea7183",
-			maroon = "#ea838c",
-			peach = "#f39967",
-			yellow = "#eaca89",
-			green = "#96d382",
-			teal = "#78cec1",
-			sky = "#91d7e3",
-			sapphire = "#68bae0",
-			blue = "#739df2",
-			lavender = "#a0a8f6",
-			text = "#b5c1f1",
-			subtext1 = "#a6b0d8",
-			subtext0 = "#959ec2",
-			overlay2 = "#848cad",
-			overlay1 = "#717997",
-			overlay0 = "#63677f",
-			surface2 = "#505469",
-			surface1 = "#3e4255",
-			surface0 = "#2c2f40",
-			base = "#1a1c2a",
-			mantle = "#141620",
-			crust = "#0e0f16",
-		},
-	},
-})
-
-vim.cmd[[colorscheme catppuccin]]
-
--- [[ Basic Keymaps ]]
+vim.cmd [[colorscheme catppuccin]]
 
 -- [[ Highlight on yank ]] See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -263,7 +223,8 @@ local function find_git_root()
   local cwd = vim.fn.getcwd()
   -- If the buffer is not associated with a file, return nil
   if current_file == "" then
-    current_dir = cwd else
+    current_dir = cwd
+  else
     -- Extract the directory from the current file's path
     current_dir = vim.fn.fnamemodify(current_file, ":h")
   end
@@ -282,7 +243,7 @@ local function live_grep_git_root()
   local git_root = find_git_root()
   if git_root then
     require('telescope.builtin').live_grep({
-      search_dirs = {git_root},
+      search_dirs = { git_root },
     })
   end
 end
@@ -308,6 +269,7 @@ keymap('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]e
 keymap('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 keymap('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 keymap('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
