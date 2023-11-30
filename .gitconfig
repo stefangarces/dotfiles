@@ -2,4 +2,4 @@
 	email = stefan.garces@volvo.com
 	name = Stefan Garces
 [core]
-	editor = vim
+	editor = nvim

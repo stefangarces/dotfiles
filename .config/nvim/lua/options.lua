@@ -29,6 +29,9 @@ vim.o.breakindent = true
 -- Save undo history
 vim.o.undofile = true
 
+-- keep the cursor 15 lines from top and bottom
+vim.o.scrolloff = 15
+
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
