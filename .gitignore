@@ -1,0 +1,5 @@
+# Cypress cache
+.config/Cypress
+
+# gitconfig's
+.gitconfig
