@@ -31,6 +31,10 @@ keymap({'v', 'i', 'n'}, '<Right>', '<Nop>', {noremap = true, silent = true})
 -- Disabling ctrl + z
 keymap({'v', 'i', 'n'}, '<C-z>', '<Nop>', {noremap = true, silent = true})
 
+keymap({'n'}, '<leader>im', ":Telescope import<CR>", { noremap = true })
+keymap({'n'}, '<leader>f', ":Format<CR>", { noremap = true })
+
+
 -- keymaps for opening telescope-file-browser
 keymap(
   "n",
