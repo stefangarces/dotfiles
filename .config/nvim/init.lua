@@ -56,8 +56,10 @@ lazy.setup({
   'tpope/vim-sleuth',
   -- Plugin for comment out code
   'tpope/vim-commentary',
-
+  -- Plugin for formatting the code
   'sbdchd/neoformat',
+  -- Enable to see which context the cursor is inside
+	"nvim-treesitter/nvim-treesitter-context",
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
