@@ -47,19 +47,15 @@ lazy.setup({
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
   },
 
-  -- Git blame plugin
-  'APZelos/blamer.nvim',
-  -- Git related plugins
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
-  -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
-  -- Plugin for comment out code
-  'tpope/vim-commentary',
-  -- Plugin for formatting the code
-  'sbdchd/neoformat',
-  -- Enable to see which context the cursor is inside
-	"nvim-treesitter/nvim-treesitter-context",
+  'APZelos/blamer.nvim', -- Git blame plugin
+  'tpope/vim-fugitive', -- Git related plugins
+  'tpope/vim-rhubarb', -- Git related plugins 
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-commentary', -- Plugin for comment out code
+  'tpope/vim-surround', -- Plugin for surroundings
+  'sbdchd/neoformat', -- Plugin for formatting the code
+	"nvim-treesitter/nvim-treesitter-context", -- Enable to see which context the cursor is inside
+  'jiangmiao/auto-pairs', -- Pairs for brackets and quotation marks
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
