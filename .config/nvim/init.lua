@@ -18,25 +18,21 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- [[ Configure plugins ]]
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
 local lazy = require('lazy')
 
 lazy.setup({
-  'APZelos/blamer.nvim', -- Git blame plugin
-  'tpope/vim-fugitive', -- Git related plugins
-  'tpope/vim-rhubarb', -- Git related plugins 
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-commentary', -- Plugin for comment out code
-  'tpope/vim-surround', -- Plugin for surroundings
-  'sbdchd/neoformat', -- Plugin for formatting the code
-	"nvim-treesitter/nvim-treesitter-context", -- Enable to see which context the cursor is inside
-  'jiangmiao/auto-pairs', -- Pairs for brackets and quotation marks
-  { 'folke/which-key.nvim',  opts = {} }, -- Useful plugin to show you pending keybinds.
+  'APZelos/blamer.nvim',                     -- Git blame plugin
+  'tpope/vim-fugitive',                      -- Git related plugins
+  'tpope/vim-rhubarb',                       -- Git related plugins
+  'tpope/vim-sleuth',                        -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-commentary',                    -- Plugin for comment out code
+  'tpope/vim-surround',                      -- Plugin for surroundings
+  'sbdchd/neoformat',                        -- Plugin for formatting the code
+  "nvim-treesitter/nvim-treesitter-context", -- Enable to see which context the cursor is inside
+  'jiangmiao/auto-pairs',                    -- Pairs for brackets and quotation marks
+  'renerocksai/telekasten.nvim',             -- Plugin for notes
+  'jose-elias-alvarez/null-ls.nvim',         -- Fix prettier formatting (?)
+  { 'folke/which-key.nvim',  opts = {} },    -- Useful plugin to show you pending keybinds.
 
   {
     "catppuccin/nvim",
@@ -63,7 +59,7 @@ lazy.setup({
 
       -- Useful status updates for LSP
       { 'j-hui/fidget.nvim', opts = {} }, -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      'folke/neodev.nvim' -- Additional lua configuration, makes nvim stuff amazing!
+      'folke/neodev.nvim'                 -- Additional lua configuration, makes nvim stuff amazing!
     },
   },
 
@@ -71,9 +67,9 @@ lazy.setup({
     -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = {
-      'L3MON4D3/LuaSnip', -- Snippet Engine & its associated nvim-cmp source
-      'saadparwaiz1/cmp_luasnip', -- || --
-      'hrsh7th/cmp-nvim-lsp', -- Adds LSP completion capabilities
+      'L3MON4D3/LuaSnip',             -- Snippet Engine & its associated nvim-cmp source
+      'saadparwaiz1/cmp_luasnip',     -- || --
+      'hrsh7th/cmp-nvim-lsp',         -- Adds LSP completion capabilities
       'rafamadriz/friendly-snippets', -- Adds a number of user-friendly snippets
     },
   },
